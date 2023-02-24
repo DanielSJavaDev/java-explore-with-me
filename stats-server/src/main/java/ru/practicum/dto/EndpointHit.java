@@ -1,17 +1,16 @@
 package ru.practicum.dto;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ViewStats {
+public class EndpointHit {
+    Long id;
     String app;
     String uri;
-    Long hits;
+    String ip;
+    String timestamp;
 }
