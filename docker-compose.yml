@@ -1,9 +1,9 @@
 version: '3.1'
 services:
   stats-server:
-    build: stats-server
-    image: stats-server-image
-    container_name: stats-server-container
+    build: stats-service
+    image: stats-service-image
+    container_name: stats-service-container
     ports:
       - "9090:9090"
     depends_on:
@@ -12,6 +12,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/statsdb
       - POSTGRES_USER=statsdb
       - POSTGRES_PASSWORD=stats
+      - stats-service.url=http://stats-service:9090
 
   stats-db:
     image: postgres:14-alpine
