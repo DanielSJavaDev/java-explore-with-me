@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 amazoncorretto:11-alpine-jdk
+FROM amazoncorretto:11-alpine-jdk
 VOLUME /tmp
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
