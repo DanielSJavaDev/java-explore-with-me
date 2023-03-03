@@ -12,7 +12,7 @@ public class HitClientConfig {
     private String url;
 
     @Bean
-    HitClient hitClient() {
+    public HitClient hitClient() {
         RestTemplateBuilder builder = new RestTemplateBuilder();
         return new HitClient(url, builder);
     }
