@@ -14,6 +14,7 @@ public class HitClientConfig {
     @Bean
     public HitClient hitClient() {
         RestTemplateBuilder builder = new RestTemplateBuilder();
+        //comment
         return new HitClient(url, builder);
     }
 }
