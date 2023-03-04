@@ -57,7 +57,6 @@ CREATE TABLE IF NOT EXISTS events_compilations
 (
     event_id       BIGINT REFERENCES events (id) ON DELETE CASCADE,
     compilation_id BIGINT REFERENCES compilations (id) ON DELETE CASCADE,
-    PRIMARY KEY (event_id, compilation_id),
 
     CONSTRAINT pk_compilation_of_events PRIMARY KEY (compilation_id, event_id),
     CONSTRAINT fk_comofeve_on_compilation FOREIGN KEY (compilation_id) REFERENCES compilations (id),
