@@ -12,11 +12,11 @@ import java.util.List;
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Long> {
 
-    @Query("select v.event from Vote v where v.is_positive = ?1 order by v.event.id asc")
-    List<Event> findWithBooleanTopAsc( boolean isPositive, Pageable pageable);
+    @Query("select v.event from Vote v where v.isPositive = ?1 order by v.event.id asc")
+    List<Event> findWithBooleanTopAsc(boolean isPositive, Pageable pageable);
 
-    @Query("select v.event from Vote v where v.is_positive = ?1 order by v.event.id desc")
-    List<Event> findWithBooleanTopDesc( boolean isPositive, Pageable pageable);
+    @Query("select v.event from Vote v where v.isPositive = ?1 order by v.event.id desc")
+    List<Event> findWithBooleanTopDesc(boolean isPositive, Pageable pageable);
 
     @Query("select v.event from Vote v order by v.event.id asc")
     List<Event> findTopAsc(Pageable pageable);

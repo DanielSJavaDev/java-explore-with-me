@@ -2,7 +2,6 @@ package ru.practicum.ewm.service.priv;
 
 import ru.practicum.ewm.dto.*;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public interface PrivateEventService {

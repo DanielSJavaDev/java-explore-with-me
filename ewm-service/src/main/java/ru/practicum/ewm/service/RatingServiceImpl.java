@@ -101,7 +101,7 @@ public class RatingServiceImpl implements RatingService {
             Vote vote = Vote.builder()
                     .user(user)
                     .event(event)
-                    .is_positive(isPositive)
+                    .isPositive(isPositive)
                     .build();
 
             voteRepository.save(vote);

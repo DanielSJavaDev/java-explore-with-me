@@ -23,6 +23,6 @@ public class Vote {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)
     User user;
-    @Column
-    boolean is_positive;
+    @Column(name = "is_positive")
+    boolean isPositive;
 }
