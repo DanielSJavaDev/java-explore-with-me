@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS users, categories, events, compilations, events_compilations, requests;
+DROP TABLE IF EXISTS users, categories, events, compilations, events_compilations, requests, votes;
 
 CREATE TABLE IF NOT EXISTS users
 (
@@ -76,4 +76,16 @@ CREATE TABLE IF NOT EXISTS requests
     CONSTRAINT FK_PARTICIPATION_REQUESTS_ON_EVENT FOREIGN KEY (event_id) REFERENCES events (id),
     CONSTRAINT FK_PARTICIPATION_REQUESTS_ON_REQUESTER FOREIGN KEY (requester_id) REFERENCES users (id),
     CONSTRAINT UQ_PARTICIPANT_PER_EVENT UNIQUE (requester_id, event_id)
+);
+
+CREATE TABLE IF NOT EXISTS votes
+(
+    id           BIGINT GENERATED ALWAYS AS IDENTITY,
+    event_id BIGINT REFERENCES events (id) ON DELETE CASCADE,
+    owner_id BIGINT REFERENCES users (id) ON DELETE CASCADE,
+    is_positive BOOLEAN,
+
+    CONSTRAINT pk_votes PRIMARY KEY (id),
+    CONSTRAINT fk_like_on_event FOREIGN KEY (event_id) REFERENCES events,
+    CONSTRAINT fk_like_on_owner FOREIGN KEY (owner_id) REFERENCES users
 );

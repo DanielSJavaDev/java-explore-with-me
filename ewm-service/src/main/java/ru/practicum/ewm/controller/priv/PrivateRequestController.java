@@ -15,12 +15,12 @@ import java.util.List;
 public class PrivateRequestController {
     private final PrivateRequestService service;
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<ParticipationRequestDto>> getAllByUserId(@PathVariable Long userId) {
         return ResponseEntity.ok(service.getAllByUserId(userId));
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<ParticipationRequestDto> sendRequest(@PathVariable Long userId,
                                                                @RequestParam Long eventId) {
         return new ResponseEntity<>(service.sendRequest(userId, eventId), HttpStatus.CREATED);

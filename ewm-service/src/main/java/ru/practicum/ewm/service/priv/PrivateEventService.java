@@ -2,6 +2,7 @@ package ru.practicum.ewm.service.priv;
 
 import ru.practicum.ewm.dto.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public interface PrivateEventService {
@@ -16,4 +17,5 @@ public interface PrivateEventService {
     List<ParticipationRequestDto> getRequestsByEventIdAndInitiatorId(Long eventId, Long userId);
 
     EventRequestStatusUpdateResult updateRequestStatusByInitiator(Long eventId, Long userId, EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest);
+
 }
