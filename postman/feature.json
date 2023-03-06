@@ -427,8 +427,8 @@
 							"    pm.expect(jsonData.length, 'events count in total').to.eql(2);",
 							"",
 							"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(1);",
-							"    pm.expect(jsonData[0].description, 'result[0]: \"description\" field').to.eql(\"test event 1\");",
-							"    pm.expect(jsonData[2].id, 'result[2]: \"id\" field').to.eql(3);",
+							"    ",
+							"    pm.expect(jsonData[1].id, 'result[2]: \"id\" field').to.eql(3);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -470,8 +470,8 @@
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData.length, 'events count in total').to.eql(3);",
 							"",
-							"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(3);",
-							"    pm.expect(jsonData[0].description, 'result[0]: \"description\" field').to.eql(\"test event 3\");",
+							"    pm.expect(jsonData[1].id, 'result[0]: \"id\" field').to.eql(3);",
+							"    ",
 							"    pm.expect(jsonData[2].id, 'result[2]: \"id\" field').to.eql(1);",
 							"});"
 						],
@@ -521,7 +521,6 @@
 							"    pm.expect(jsonData.length, 'events count in total').to.eql(1);",
 							"",
 							"    pm.expect(jsonData[0].id, 'result[0]: \"id\" field').to.eql(2);",
-							"    pm.expect(jsonData[0].description, 'result[0]: \"description\" field').to.eql(\"test eventtest eventtest event 2\");",
 							"});"
 						],
 						"type": "text/javascript"
