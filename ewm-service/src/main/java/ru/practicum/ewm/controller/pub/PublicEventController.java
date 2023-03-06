@@ -45,7 +45,7 @@ public class PublicEventController {
     @GetMapping("/rating")
     public ResponseEntity<LinkedList<EventShortDto>> getEventRating(@RequestParam(required = false, defaultValue = "false") boolean isRandom,
                                                                     @RequestParam(required = false, defaultValue = "POSITIVE") String type,
-                                                                    @RequestParam boolean isAsc,
+                                                                    @RequestParam(required = false, defaultValue = "false") boolean isAsc,
                                                                     @RequestParam(defaultValue = "0") Integer from,
                                                                     @RequestParam(defaultValue = "10") Integer size) {
         return new ResponseEntity<>(ratingService.getRating(isRandom, isAsc, type, from, size), HttpStatus.OK);

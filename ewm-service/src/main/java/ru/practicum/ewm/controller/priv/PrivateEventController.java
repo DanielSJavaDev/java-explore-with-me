@@ -61,8 +61,8 @@ public class PrivateEventController {
     @GetMapping("/rating")
     public ResponseEntity<List<EventShortDto>> getEventRating(@PathVariable Long userId,
                                                               @RequestParam(required = false, defaultValue = "false") boolean isRandom,
-                                                              @RequestParam String type,
-                                                              @RequestParam boolean isAsc,
+                                                              @RequestParam(required = false, defaultValue = "POSITIVE") String type,
+                                                              @RequestParam(required = false, defaultValue = "false") boolean isAsc,
                                                               @RequestParam(defaultValue = "0") Integer from,
                                                               @RequestParam(defaultValue = "10") Integer size) {
         return new ResponseEntity<>(ratingService.getRating(isRandom, isAsc, type, from, size), HttpStatus.OK);

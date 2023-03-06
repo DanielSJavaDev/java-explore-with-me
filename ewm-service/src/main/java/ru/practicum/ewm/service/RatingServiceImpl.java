@@ -20,7 +20,7 @@ import ru.practicum.ewm.repository.UserRepository;
 import ru.practicum.ewm.repository.VoteRepository;
 
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,17 +41,17 @@ public class RatingServiceImpl implements RatingService {
             response.addFirst(EventMapper.toEventShortDto(randomEvent));
         }
 
-        List<EventShortDto> eventDtos;
+        Set<EventShortDto> eventDtos;
 
         switch (type.toUpperCase()) {
             case "ALL":
                 if (isAsc) {
                     eventDtos = voteRepository.findTopAsc(PageRequest.of(from, size)).stream()
-                            .map(EventMapper::toEventShortDto).collect(Collectors.toList());
+                            .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 } else {
                     eventDtos = voteRepository.findTopDesc(PageRequest.of(from, size)).stream()
-                            .map(EventMapper::toEventShortDto).collect(Collectors.toList());
+                            .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 }
                 for (EventShortDto event : response) {
@@ -61,11 +61,11 @@ public class RatingServiceImpl implements RatingService {
             case "POSITIVE":
                 if (isAsc) {
                     eventDtos = voteRepository.findWithBooleanTopAsc(true, PageRequest.of(from, size)).stream()
-                            .map(EventMapper::toEventShortDto).collect(Collectors.toList());
+                            .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 } else {
                     eventDtos = voteRepository.findWithBooleanTopDesc(true, PageRequest.of(from, size)).stream()
-                            .map(EventMapper::toEventShortDto).collect(Collectors.toList());
+                            .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 }
                 for (EventShortDto event : response) {
@@ -75,11 +75,11 @@ public class RatingServiceImpl implements RatingService {
             case "NEGATIVE":
                 if (isAsc) {
                     eventDtos = voteRepository.findWithBooleanTopAsc(false, PageRequest.of(from, size)).stream()
-                            .map(EventMapper::toEventShortDto).collect(Collectors.toList());
+                            .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 } else {
                     eventDtos = voteRepository.findWithBooleanTopDesc(false, PageRequest.of(from, size)).stream()
-                            .map(EventMapper::toEventShortDto).collect(Collectors.toList());
+                            .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 }
                 for (EventShortDto event : response) {
