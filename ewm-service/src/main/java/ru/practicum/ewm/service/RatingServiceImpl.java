@@ -46,46 +46,59 @@ public class RatingServiceImpl implements RatingService {
         switch (type.toUpperCase()) {
             case "ALL":
                 if (isAsc) {
-                    eventDtos = voteRepository.findTopAsc(PageRequest.of(from, size)).stream()
+                    eventDtos = voteRepository.findEventsByVoteCountAllAsc(PageRequest.of(from, size)).stream()
                             .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 } else {
-                    eventDtos = voteRepository.findTopDesc(PageRequest.of(from, size)).stream()
+                    eventDtos = voteRepository.findEventsByVoteCountAllDesc(PageRequest.of(from, size)).stream()
                             .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 }
                 for (EventShortDto event : response) {
-                    setViews(event.getId());
+                    setEventViewsCountAfterView(event.getId());
                 }
                 return response;
             case "POSITIVE":
                 if (isAsc) {
-                    eventDtos = voteRepository.findWithBooleanTopAsc(true, PageRequest.of(from, size)).stream()
+                    eventDtos = voteRepository.findEventsByVoteCountWithBooleanAsc(true, PageRequest.of(from, size)).stream()
                             .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 } else {
-                    eventDtos = voteRepository.findWithBooleanTopDesc(true, PageRequest.of(from, size)).stream()
+                    eventDtos = voteRepository.findEventsByVoteCountWithBooleanDesc(true, PageRequest.of(from, size)).stream()
                             .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 }
                 for (EventShortDto event : response) {
-                    setViews(event.getId());
+                    setEventViewsCountAfterView(event.getId());
                 }
                 return response;
             case "NEGATIVE":
                 if (isAsc) {
-                    eventDtos = voteRepository.findWithBooleanTopAsc(false, PageRequest.of(from, size)).stream()
+                    eventDtos = voteRepository.findEventsByVoteCountWithBooleanAsc(false, PageRequest.of(from, size)).stream()
                             .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 } else {
-                    eventDtos = voteRepository.findWithBooleanTopDesc(false, PageRequest.of(from, size)).stream()
+                    eventDtos = voteRepository.findEventsByVoteCountWithBooleanDesc(false, PageRequest.of(from, size)).stream()
                             .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 }
                 for (EventShortDto event : response) {
-                    setViews(event.getId());
+                    setEventViewsCountAfterView(event.getId());
                 }
                 return response;
+            case "VIEWCOUNT":
+                if (isAsc) {
+                    eventDtos = voteRepository.findEventsByViewsCountAsc( PageRequest.of(from, size)).stream()
+                            .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
+                    response.addAll(eventDtos);
+                } else {
+                    eventDtos = voteRepository.findEventsByViewsCountDesc( PageRequest.of(from, size)).stream()
+                            .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
+                    response.addAll(eventDtos);
+                }
+                for (EventShortDto event : response) {
+                    setEventViewsCountAfterView(event.getId());
+                }
             default:
                 throw new UnknownRatingTypeException("Rating type " + type + " was not found.");
         }
@@ -123,7 +136,7 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     @Transactional
-    public void setViews(Long id) {
+    public void setEventViewsCountAfterView(Long id) {
         Event event = getEventByIdIdWithCheck(id);
         event.setViews(event.getViews() + 1);
         eventRepository.save(event);

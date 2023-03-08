@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public interface RatingService {
     LinkedList<EventShortDto> getRating(boolean isRandom, boolean isAsc, String type, Integer from, Integer size);
 
-    void setViews(Long id);
+    void setEventViewsCountAfterView(Long id);
 
     EventFullDto addVote(Long userId, boolean isPositive, Long eventId);
 

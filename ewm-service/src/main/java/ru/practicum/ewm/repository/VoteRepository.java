@@ -12,18 +12,42 @@ import java.util.List;
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Long> {
 
-    @Query("select v.event from Vote v where v.isPositive = ?1 order by v.event.id asc")
-    List<Event> findWithBooleanTopAsc(boolean isPositive, Pageable pageable);
-
-    @Query("select v.event from Vote v where v.isPositive = ?1 order by v.event.id desc")
-    List<Event> findWithBooleanTopDesc(boolean isPositive, Pageable pageable);
-
-    @Query("select v.event from Vote v order by v.event.id asc")
-    List<Event> findTopAsc(Pageable pageable);
-
-    @Query("select v.event from Vote v order by v.event.id desc")
-    List<Event> findTopDesc(Pageable pageable);
-
     @Query("select v from Vote v where v.user.id = ?1 and v.event.id = ?2")
     Vote findVoteByUserIdAndEventId(Long userId, Long eventId);
+
+    @Query("SELECT e, COUNT(v.event.id) AS vote_count " +
+            "FROM Event e " +
+            "LEFT JOIN Vote v ON e.id = v.event.id " +
+            "WHERE v.isPositive = ?1 " +
+            "GROUP BY e.id " +
+            "ORDER BY vote_count DESC")
+    List<Event> findEventsByVoteCountWithBooleanDesc(boolean isPositive, Pageable pageable);
+
+    @Query("SELECT e, COUNT(v.event.id) AS vote_count " +
+            "FROM Event e " +
+            "LEFT JOIN Vote v ON e.id = v.event.id " +
+            "WHERE v.isPositive = ?1 " +
+            "GROUP BY e.id " +
+            "ORDER BY vote_count ASC")
+    List<Event> findEventsByVoteCountWithBooleanAsc(boolean isPositive, Pageable pageable);
+
+    @Query("SELECT e, COUNT(v.event.id) AS vote_count " +
+            "FROM Event e " +
+            "LEFT JOIN Vote v ON e.id = v.event.id " +
+            "GROUP BY e.id " +
+            "ORDER BY vote_count ASC")
+    List<Event> findEventsByVoteCountAllAsc(Pageable pageable);
+
+    @Query("SELECT e, COUNT(v.event.id) AS vote_count " +
+            "FROM Event e " +
+            "LEFT JOIN Vote v ON e.id = v.event.id " +
+            "GROUP BY e.id " +
+            "ORDER BY vote_count DESC")
+    List<Event> findEventsByVoteCountAllDesc(Pageable pageable);
+
+    @Query("SELECT e FROM Event e ORDER BY e.views ASC")
+    List<Event> findEventsByViewsCountAsc(Pageable pageable);
+
+    @Query("SELECT e FROM Event e ORDER BY e.views DESC")
+    List<Event> findEventsByViewsCountDesc(Pageable pageable);
 }
