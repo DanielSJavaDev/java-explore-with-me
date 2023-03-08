@@ -1,5 +1,7 @@
-# java-explore-with-me
 Ссылка на пул реквест: https://github.com/DanielSJavaDev/java-explore-with-me/pull/8
+
+Реализовал фичу показа рейтинга событий по количеству лайков, количеству дизлайков, общему количеству оценок.
+Так же добавил возможность просмотра рейтинга по количеству просмотров.
 
 Front view example for rating feature:
 
