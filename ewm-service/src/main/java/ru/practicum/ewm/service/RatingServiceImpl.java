@@ -88,11 +88,11 @@ public class RatingServiceImpl implements RatingService {
                 return response;
             case "VIEWCOUNT":
                 if (isAsc) {
-                    eventDtos = voteRepository.findEventsByViewsCountAsc( PageRequest.of(from, size)).stream()
+                    eventDtos = voteRepository.findEventsByViewsCountAsc(PageRequest.of(from, size)).stream()
                             .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 } else {
-                    eventDtos = voteRepository.findEventsByViewsCountDesc( PageRequest.of(from, size)).stream()
+                    eventDtos = voteRepository.findEventsByViewsCountDesc(PageRequest.of(from, size)).stream()
                             .map(EventMapper::toEventShortDto).collect(Collectors.toSet());
                     response.addAll(eventDtos);
                 }
