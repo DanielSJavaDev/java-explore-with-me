@@ -85,4 +85,24 @@ public class ErrorHandler {
                 "For the requested operation the conditions are not met.",
                 e.getMessage());
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiError handleNotFoundException(final UnknownRatingTypeException e) {
+        log.error(e.getLocalizedMessage(), e.getMessage());
+        return new ApiError(
+                "NOT_FOUND",
+                "Rating type was not found.",
+                e.getMessage());
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiError handleForbiddenException(final DuplicateException e) {
+        log.error(e.getLocalizedMessage(), e.getMessage());
+        return new ApiError(
+                "CONFLICT",
+                "Duplicated vote",
+                e.getMessage());
+    }
 }
